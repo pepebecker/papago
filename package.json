@@ -1,0 +1,29 @@
+{
+  "name": "papago",
+  "version": "1.0.0",
+  "description": "",
+  "keywords": [
+    "papago",
+    "naver",
+    "korean",
+    "translate"
+  ],
+  "homepage": "https://github.com/pepebecker/papago#readme",
+  "bugs": {
+    "url": "https://github.com/pepebecker/papago/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pepebecker/papago.git"
+  },
+  "license": "ISC",
+  "author": "Pepe Becker <mail@pepebecker.com> (https://pepe.asia)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "querystring": "^0.2.1"
+  }
+}
