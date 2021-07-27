@@ -1,8 +1,15 @@
-const axios = require('axios');
-const qs = require('querystring');
+import axios from 'axios';
+import qs from 'querystring';
+
+export interface Config {
+  NAVER_CLIENT_ID: string;
+  NAVER_CLIENT_SECRET: string;
+}
 
 class Papago {
-  constructor(config) {
+  config: Config;
+
+  constructor(config: Config) {
     this.config = config;
   }
 
@@ -13,19 +20,19 @@ class Papago {
     return true;
   }
 
-  async translate(term, enko = false) {
+  async translate(term: string, enko = false) {
     if (this.config == null) {
       throw new Error('Papago instance should be initialized with config');
     }
     if (!this.config.NAVER_CLIENT_ID) {
       const error = new Error('NAVER_CLIENT_ID needs to be defined');
-      error.notConfigured = true;
+      (error as any).notConfigured = true;
       throw error;
 
     }
     if (!this.config.NAVER_CLIENT_SECRET) {
       const error = new Error('NAVER_CLIENT_SECRET needs to be defined');
-      error.notConfigured = true;
+      (error as any).notConfigured = true;
       throw error;
     }
     if (term == null) {
@@ -53,4 +60,4 @@ class Papago {
   }
 }
 
-module.exports = Papago;
+export default Papago;
