@@ -26,14 +26,20 @@
   ],
   "scripts": {
     "prepublish": "npm run tsc",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "tsc": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json"
+    "test": "env TS_NODE_PROJECT=tsconfig.spec.json mocha -r ts-node/register tests/**/*.spec.ts",
+    "tsc": "tsc -p tsconfig.src.json && tsc -p tsconfig.cjs.json"
   },
   "dependencies": {
     "axios": "^0.21.1",
     "querystring": "^0.2.1"
   },
   "devDependencies": {
-    "@types/node": "^16.4.3"
+    "@types/chai": "^4.2.14",
+    "@types/mocha": "^8.0.4",
+    "@types/node": "^18.7.8",
+    "chai": "^4.2.0",
+    "mocha": "^8.2.1",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.1.2"
   }
 }
