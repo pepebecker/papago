@@ -1,7 +1,5 @@
 # Papago
 
-[![dependency status](https://img.shields.io/david/pepebecker/papago.svg)](https://david-dm.org/pepebecker/papago)
-[![dev dependency status](https://img.shields.io/david/dev/pepebecker/papago.svg)](https://david-dm.org/pepebecker/papago#info=devDependencies)
 [![ISC-licensed](https://img.shields.io/github/license/pepebecker/papago.svg)](https://choosealicense.com/licenses/isc/)
 
 ## Install
