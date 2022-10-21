@@ -14,13 +14,48 @@ const config: Config = {
 describe('Translate', () => {
   const papago = new Papago(config)
     
-  it('translate to English', async () => {
-    const result = await papago.translate('안녕하세요')
-    expect(result.toLowerCase()).equal('hello')
+  it('translate to Korean', async () => {
+    const result = await papago.translate('what are you doing?')
+    expect(result.toLowerCase()).equal('뭐하고 있어요?')
   })
 
-  it('translate to Korean', async () => {
-    const result = await papago.translate('hello', true)
-    expect(result.toLowerCase()).equal('안녕')
+  it('translate to Korean (enko)', async () => {
+    const result = await papago.translate('what are you doing?', true)
+    expect(result.toLowerCase()).equal('뭐하고 있어요?')
+  })
+
+  it('translate to English (enko)', async () => {
+    const result = await papago.translate('뭐하고 있어요?', false)
+    expect(result.toLowerCase()).equal('what are you doing?')
+  })
+
+  it('translate to English (source, target)', async () => {
+    const result = await papago.translate('뭐하고 있어요?', { source: 'ko', target: 'en' })
+    expect(result.toLowerCase()).equal('what are you doing?')
+  })
+
+  it('translate to Japanese', async () => {
+    const result = await papago.translate('뭐하고 있어요?', { source: 'ko', target: 'ja' })
+    expect(result.toLowerCase()).equal('何をしていますか？')
+  })
+
+  it('translate to Chinese (simplified)', async () => {
+    const result = await papago.translate('뭐하고 있어요?', { source: 'ko', target: 'zh-CN' })
+    expect(result.toLowerCase()).equal('在干什么呢？')
+  })
+
+  it('translate to Chinese (traditional)', async () => {
+    const result = await papago.translate('뭐하고 있어요?', { source: 'ko', target: 'zh-TW' })
+    expect(result.toLowerCase()).equal('在幹什麼呢？')
+  })
+
+  it('translate to Spanish', async () => {
+    const result = await papago.translate('뭐하고 있어요?', { source: 'ko', target: 'es' })
+    expect(result.toLowerCase()).equal('¿qué estás haciendo?')
+  })
+
+  it('translate to German', async () => {
+    const result = await papago.translate('뭐하고 있어요?', { source: 'ko', target: 'de' })
+    expect(result.toLowerCase()).include('was machst du')
   })
 })

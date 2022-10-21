@@ -1,9 +1,15 @@
 import axios from 'axios';
 import qs from 'querystring';
+import { LANGUAGE } from './languages'
 
 export interface Config {
   NAVER_CLIENT_ID: string;
   NAVER_CLIENT_SECRET: string;
+}
+
+interface TranslateOptions {
+  source?: LANGUAGE;
+  target?: LANGUAGE;
 }
 
 class Papago {
@@ -20,7 +26,10 @@ class Papago {
     return true;
   }
 
-  async translate(term: string, enko = false) {
+  async translate(text: string): Promise<string>;
+  async translate(text: string, enko: boolean): Promise<string>;
+  async translate(text: string, options: TranslateOptions): Promise<string>;
+  async translate(text: string, options?: TranslateOptions | boolean) {
     if (this.config == null) {
       throw new Error('Papago instance should be initialized with config');
     }
@@ -28,22 +37,28 @@ class Papago {
       const error = new Error('NAVER_CLIENT_ID needs to be defined');
       (error as any).notConfigured = true;
       throw error;
-
     }
     if (!this.config.NAVER_CLIENT_SECRET) {
       const error = new Error('NAVER_CLIENT_SECRET needs to be defined');
       (error as any).notConfigured = true;
       throw error;
     }
-    if (term == null) {
+    if (text == null) {
       throw new Error('Search term should be provided as lookup arguments');
     }
 
-    const params = qs.stringify({
-      source: enko ? 'en' : 'ko',
-      target: enko ? 'ko' : 'en',
-      text: term,
-    });
+    let source: LANGUAGE = 'en';
+    let target: LANGUAGE = 'ko';
+
+    if (typeof options === 'boolean') {
+      source = options ? 'en' : 'ko';
+      target = options ? 'ko' : 'en';
+    } else {
+      source = options?.source ?? source;
+      target = options?.target ?? target;
+    }
+
+    const params = qs.stringify({ source, target, text });
 
     const config = {
       baseURL: 'https://openapi.naver.com/v1/',
