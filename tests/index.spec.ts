@@ -16,21 +16,21 @@ describe('Translate', () => {
     
   it('translate to Korean', async () => {
     const result = await papago.translate('what are you doing?')
-    expect(result.toLowerCase()).equal('뭐하고 있어요?')
+    expect(result.toLowerCase()).equal('뭐하고 있어?')
   })
 
   it('translate to Korean (enko)', async () => {
     const result = await papago.translate('what are you doing?', true)
-    expect(result.toLowerCase()).equal('뭐하고 있어요?')
+    expect(result.toLowerCase()).equal('뭐하고 있어?')
   })
 
   it('translate to Korean (formal)', async () => {
-    const result = await papago.translate('what are you doing?', { source: 'en', target: 'ko', honorific: true })
+    const result = await papago.translate('what are you doing?', { honorific: true })
     expect(result.toLowerCase()).equal('뭐하고 있어요?')
   })
 
   it('translate to Korean (informal)', async () => {
-    const result = await papago.translate('what are you doing?', { source: 'en', target: 'ko', honorific: false })
+    const result = await papago.translate('what are you doing?', { source: 'en', target: 'ko' })
     expect(result.toLowerCase()).equal('뭐하고 있어?')
   })
 
@@ -39,14 +39,19 @@ describe('Translate', () => {
     expect(result.toLowerCase()).equal('what are you doing?')
   })
 
+  it('translate to Japanese (informal)', async () => {
+    const result = await papago.translate('뭐하고 있어요?', { source: 'ko', target: 'ja' })
+    expect(result.toLowerCase()).equal('何してるんですか？')
+  })
+
+  it('translate to Japanese (formal)', async () => {
+    const result = await papago.translate('뭐하고 있어요?', { source: 'ko', target: 'ja', honorific: true })
+    expect(result.toLowerCase()).equal('何をしていますか？')
+  })
+
   it('translate to English (source, target)', async () => {
     const result = await papago.translate('뭐하고 있어요?', { source: 'ko', target: 'en' })
     expect(result.toLowerCase()).equal('what are you doing?')
-  })
-
-  it('translate to Japanese', async () => {
-    const result = await papago.translate('뭐하고 있어요?', { source: 'ko', target: 'ja' })
-    expect(result.toLowerCase()).equal('何をしていますか？')
   })
 
   it('translate to Chinese (simplified)', async () => {

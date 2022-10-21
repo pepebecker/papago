@@ -50,12 +50,11 @@ class Papago {
 
     let source: LANGUAGE = 'en';
     let target: LANGUAGE = 'ko';
-    let honorific = true;
+    let honorific = false;
 
     if (typeof options === 'boolean') {
       source = options ? 'en' : 'ko';
       target = options ? 'ko' : 'en';
-      honorific = options ? true : false;
     } else {
       source = options?.source ?? source;
       target = options?.target ?? target;
