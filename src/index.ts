@@ -10,6 +10,7 @@ export interface Config {
 interface TranslateOptions {
   source?: LANGUAGE;
   target?: LANGUAGE;
+  honorific?: boolean;
 }
 
 class Papago {
@@ -49,16 +50,19 @@ class Papago {
 
     let source: LANGUAGE = 'en';
     let target: LANGUAGE = 'ko';
+    let honorific = true;
 
     if (typeof options === 'boolean') {
       source = options ? 'en' : 'ko';
       target = options ? 'ko' : 'en';
+      honorific = options ? true : false;
     } else {
       source = options?.source ?? source;
       target = options?.target ?? target;
+      honorific = options?.honorific ?? honorific;
     }
 
-    const params = qs.stringify({ source, target, text });
+    const params = qs.stringify({ source, target, text, honorific });
 
     const config = {
       baseURL: 'https://openapi.naver.com/v1/',

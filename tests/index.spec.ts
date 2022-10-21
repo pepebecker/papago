@@ -24,6 +24,16 @@ describe('Translate', () => {
     expect(result.toLowerCase()).equal('뭐하고 있어요?')
   })
 
+  it('translate to Korean (formal)', async () => {
+    const result = await papago.translate('what are you doing?', { source: 'en', target: 'ko', honorific: true })
+    expect(result.toLowerCase()).equal('뭐하고 있어요?')
+  })
+
+  it('translate to Korean (informal)', async () => {
+    const result = await papago.translate('what are you doing?', { source: 'en', target: 'ko', honorific: false })
+    expect(result.toLowerCase()).equal('뭐하고 있어?')
+  })
+
   it('translate to English (enko)', async () => {
     const result = await papago.translate('뭐하고 있어요?', false)
     expect(result.toLowerCase()).equal('what are you doing?')
