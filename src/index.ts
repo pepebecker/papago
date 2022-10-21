@@ -13,7 +13,7 @@ interface TranslateOptions {
   honorific?: boolean;
 }
 
-class Papago {
+export class Papago {
   config: Config;
 
   constructor(config: Config) {
@@ -79,3 +79,4 @@ class Papago {
 }
 
 export default Papago;
+export * from './languages';

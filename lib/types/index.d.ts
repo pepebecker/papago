@@ -8,7 +8,7 @@ interface TranslateOptions {
     target?: LANGUAGE;
     honorific?: boolean;
 }
-declare class Papago {
+export declare class Papago {
     config: Config;
     constructor(config: Config);
     isConfigured(): boolean;
@@ -17,3 +17,4 @@ declare class Papago {
     translate(text: string, options: TranslateOptions): Promise<string>;
 }
 export default Papago;
+export * from './languages';
