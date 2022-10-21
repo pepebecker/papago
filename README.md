@@ -30,6 +30,9 @@ console.log(await papago.translate('뭐하고 있어요?', { source: 'ko', targe
 // what are you doing?
 
 console.log(await papago.translate('뭐하고 있어요?', { source: 'ko', target: 'ja' }))
+// 何してるんですか？
+
+console.log(await papago.translate('뭐하고 있어요?', { source: 'ko', target: 'ja', honorific: true }))
 // 何をしていますか？
 
 console.log(await papago.translate('뭐하고 있어요?', { source: 'ko', target: 'es' }))
