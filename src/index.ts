@@ -48,7 +48,7 @@ export class Papago {
       throw new Error('Search term should be provided as lookup arguments');
     }
 
-    let source: LANGUAGE = 'en';
+    let source: LANGUAGE | 'auto' = 'auto';
     let target: LANGUAGE = 'ko';
     let honorific = false;
 
