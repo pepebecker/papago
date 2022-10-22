@@ -1,5 +1,4 @@
 import axios, { AxiosError } from 'axios';
-import qs from 'querystring';
 import { LANGUAGE } from './languages'
 
 export interface Config {
@@ -61,7 +60,12 @@ export class Papago {
       honorific = options?.honorific ?? honorific;
     }
 
-    const params = qs.stringify({ source, target, text, honorific });
+    const params = new URLSearchParams({
+      source,
+      target,
+      text,
+      honorific: honorific ? 'true' : 'false',
+    });
 
     const config = {
       baseURL: 'https://openapi.naver.com/v1/',
