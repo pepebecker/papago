@@ -13,7 +13,7 @@ const config: Config = {
 
 describe('Translate', () => {
   const papago = new Papago(config)
-    
+
   it('translate to Korean', async () => {
     const result = await papago.translate('what are you doing?')
     expect(result.toLowerCase()).equal('뭐하고 있어?')
@@ -40,37 +40,37 @@ describe('Translate', () => {
   })
 
   it('translate to Japanese (informal)', async () => {
-    const result = await papago.translate('뭐하고 있어요?', { source: 'ko', target: 'ja' })
+    const result = await papago.translate('뭐하고 있어요?', { target: 'ja' })
     expect(result.toLowerCase()).equal('何してるんですか？')
   })
 
   it('translate to Japanese (formal)', async () => {
-    const result = await papago.translate('뭐하고 있어요?', { source: 'ko', target: 'ja', honorific: true })
+    const result = await papago.translate('뭐하고 있어요?', { target: 'ja', honorific: true })
     expect(result.toLowerCase()).equal('何をしていますか？')
   })
 
   it('translate to English (source, target)', async () => {
-    const result = await papago.translate('뭐하고 있어요?', { source: 'ko', target: 'en' })
+    const result = await papago.translate('뭐하고 있어요?', { target: 'en' })
     expect(result.toLowerCase()).equal('what are you doing?')
   })
 
   it('translate to Chinese (simplified)', async () => {
-    const result = await papago.translate('뭐하고 있어요?', { source: 'ko', target: 'zh-CN' })
+    const result = await papago.translate('뭐하고 있어요?', { target: 'zh-CN' })
     expect(result.toLowerCase()).equal('在干什么呢？')
   })
 
   it('translate to Chinese (traditional)', async () => {
-    const result = await papago.translate('뭐하고 있어요?', { source: 'ko', target: 'zh-TW' })
+    const result = await papago.translate('뭐하고 있어요?', { target: 'zh-TW' })
     expect(result.toLowerCase()).equal('在幹什麼呢？')
   })
 
   it('translate to Spanish', async () => {
-    const result = await papago.translate('뭐하고 있어요?', { source: 'ko', target: 'es' })
+    const result = await papago.translate('뭐하고 있어요?', { target: 'es' })
     expect(result.toLowerCase()).equal('¿qué estás haciendo?')
   })
 
   it('translate to German', async () => {
-    const result = await papago.translate('뭐하고 있어요?', { source: 'ko', target: 'de' })
+    const result = await papago.translate('뭐하고 있어요?', { target: 'de' as any })
     expect(result.toLowerCase()).include('was machst du')
   })
 })
