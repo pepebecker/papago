@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import qs from 'querystring';
 import { LANGUAGE } from './languages'
 
@@ -48,7 +48,7 @@ export class Papago {
       throw new Error('Search term should be provided as lookup arguments');
     }
 
-    let source: LANGUAGE = 'en';
+    let source: LANGUAGE | 'auto' = 'auto';
     let target: LANGUAGE = 'ko';
     let honorific = false;
 
@@ -72,9 +72,21 @@ export class Papago {
       },
     };
 
-    const response = await axios.post('papago/n2mt', params, config);
-
-    return response.data.message.result.translatedText;
+    try {
+      const response = await axios.post('papago/n2mt', params, config);
+      return response.data.message.result.translatedText;
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        const axiosError = error as AxiosError;
+        const newError = new Error(axiosError.response?.data.errorMessage) as any;
+        newError.code = axiosError.response?.data.errorCode;
+        newError.statusCode = axiosError.response?.status;
+        newError.statusText = axiosError.response?.statusText;
+        throw newError;
+      } else {
+        throw error;
+      }
+    }
   }
 }
 
